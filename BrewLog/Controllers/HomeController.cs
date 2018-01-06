@@ -12,7 +12,7 @@ namespace BrewLog.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Recipes");
         }
 
         public IActionResult About()

@@ -1,0 +1,120 @@
+﻿@model BrewLog.Models.Recipe
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+
+    <div>
+        <h4>@Html.DisplayFor(model => model.Name)</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Brewery)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Brewery)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Volume)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Volume)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.BoilSize)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BoilSize)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.BoilTime)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BoilTime)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Efficiency)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Efficiency)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.OriginalGravity)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.OriginalGravity)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FinalGravity)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FinalGravity)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Notes)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Notes)
+            </dd>
+        </dl>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Naam
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Alpha
+                </th>
+                <th>
+                    Minuten
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var hop in Model.Hops)
+            {
+            <tr>
+                <td>@hop.Name</td>
+                <td>@hop.Amount</td>
+                <td>@hop.Type</td>
+                <td>@hop.Alpha</td>
+                <td>@hop.Minutes</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+</body>
+</html>

@@ -11,9 +11,10 @@ using System;
 namespace BrewLog.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180105144959_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -194,23 +195,17 @@ namespace BrewLog.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ABV");
+                    b.Property<double>("BoilSize");
 
-                    b.Property<double?>("BoilSize");
-
-                    b.Property<int?>("BoilTime");
+                    b.Property<int>("BoilTime");
 
                     b.Property<string>("Brewery");
 
-                    b.Property<string>("Color");
-
                     b.Property<DateTime>("Date");
 
-                    b.Property<double?>("Efficiency");
+                    b.Property<double>("Efficiency");
 
                     b.Property<string>("FinalGravity");
-
-                    b.Property<string>("IBU");
 
                     b.Property<string>("Name");
 
@@ -220,7 +215,7 @@ namespace BrewLog.Data.Migrations
 
                     b.Property<int>("Version");
 
-                    b.Property<double?>("Volume");
+                    b.Property<double>("Volume");
 
                     b.HasKey("Id");
 

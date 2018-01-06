@@ -22,5 +22,17 @@ namespace BrewLog.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<HopForm> HopForms { get; set; }
+        public DbSet<HopType> HopTypes { get; set; }
+        public DbSet<HopUse> HopUses { get; set; }
+        public DbSet<Hop> Hops { get; set; }
+        public DbSet<FermentableType> FermentableTypes { get; set; }
+        public DbSet<Fermentable> Fermentables { get; set; }
+        public DbSet<YeastForm> YeastForms { get; set; }
+        public DbSet<YeastType> YeastTypes { get; set; }
+        public DbSet<Yeast> Yeasts { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
+
     }
 }
