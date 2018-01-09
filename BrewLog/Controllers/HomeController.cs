@@ -22,6 +22,11 @@ namespace BrewLog.Controllers
             return View();
         }
 
+        public IActionResult Recipes()
+        {
+            return RedirectToAction("Index", "Recipes");
+        }
+
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

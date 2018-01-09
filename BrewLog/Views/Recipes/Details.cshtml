@@ -4,18 +4,14 @@
     Layout = "_Layout";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-
-    <div>
-        <h4>@Html.DisplayFor(model => model.Name)</h4>
-        <hr />
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>
+            <span class="glyphicon glyphicon-book" aria-hidden="true"></span> 
+             @Html.DisplayFor(model => model.Name)
+        </h3>
+    </div>
+    <div class="panel-body">
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.Name)
@@ -79,42 +75,124 @@
             </dd>
         </dl>
     </div>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>
-                    Naam
-                </th>
-                <th>
-                    Amount
-                </th>
-                <th>
-                    Type
-                </th>
-                <th>
-                    Alpha
-                </th>
-                <th>
-                    Minuten
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var hop in Model.Hops)
-            {
-            <tr>
-                <td>@hop.Name</td>
-                <td>@hop.Amount</td>
-                <td>@hop.Type</td>
-                <td>@hop.Alpha</td>
-                <td>@hop.Minutes</td>
-            </tr>
-            }
-        </tbody>
-    </table>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-        <a asp-action="Index">Back to List</a>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3><img src="~/images/hop_icon.svg" alt="Hop Icon" height="48" /> Hops</h3>
     </div>
-</body>
-</html>
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Naam
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                    <th>
+                        Use
+                    </th>
+                    <th>
+                        Alpha
+                    </th>
+                    <th>
+                        Minuten
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var hop in Model.Hops)
+                {
+                    <tr>
+                        <td>@hop.Name</td>
+                        <td>@hop.DisplayAmount</td>
+                        <td>@hop.Use</td>
+                        <td>@hop.Alpha</td>
+                        <td>@hop.DisplayTime</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3><span class="glyphicon glyphicon-grain" aria-hidden="true"></span> Fermentables</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Naam
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                    <th>
+                        Kleur
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var fermentable in Model.Fermentables)
+                {
+                    <tr>
+                        <td>@fermentable.Name</td>
+                        <td>@fermentable.DisplayAmount</td>
+                        <td>@fermentable.Type</td>
+                        <td>@fermentable.DisplayColor</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3><img src="~/images/yeast_icon.svg" height="48" /> Yeast</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Naam
+                    </th>
+                    <th>
+                        Laboratorium
+                    </th>
+                    <th>
+                        Product ID
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                    <th>
+                        Vorm
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var yeast in Model.Yeasts)
+                {
+                    <tr>
+                        <td>@yeast.Name</td>
+                        <td>@yeast.Laboratory</td>
+                        <td>@yeast.ProductID</td>
+                        <td>@yeast.Type</td>
+                        <td>@yeast.Form</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="btn-group" role="group">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-default" role="button">Edit</a>
+    <a asp-action="Index" class="btn btn-default" role="button">Back to List</a>
+</div>

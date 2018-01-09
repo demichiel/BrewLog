@@ -11,9 +11,10 @@ using System;
 namespace BrewLog.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180109094908_EditModels")]
+    partial class EditModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,23 +233,23 @@ namespace BrewLog.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Form");
+                    b.Property<bool?>("AmountIsWeight");
 
-                    b.Property<string>("Laboratory");
+                    b.Property<Guid?>("FormId");
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("Notes");
-
-                    b.Property<string>("ProductID");
-
                     b.Property<Guid?>("RecipeId");
 
-                    b.Property<string>("Type");
+                    b.Property<Guid?>("TypeId");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FormId");
+
                     b.HasIndex("RecipeId");
+
+                    b.HasIndex("TypeId");
 
                     b.ToTable("Yeasts");
                 });
@@ -401,9 +402,17 @@ namespace BrewLog.Data.Migrations
 
             modelBuilder.Entity("BrewLog.Models.Yeast", b =>
                 {
+                    b.HasOne("BrewLog.Models.YeastForm", "Form")
+                        .WithMany()
+                        .HasForeignKey("FormId");
+
                     b.HasOne("BrewLog.Models.Recipe")
                         .WithMany("Yeasts")
                         .HasForeignKey("RecipeId");
+
+                    b.HasOne("BrewLog.Models.YeastType", "Type")
+                        .WithMany()
+                        .HasForeignKey("TypeId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

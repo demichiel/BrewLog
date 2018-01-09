@@ -10,11 +10,14 @@ namespace BrewLog.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public int Version { get; set; } = 1;
-        public FermentableType Type { get; set; }
+        public string Type { get; set; }
         public double Amount { get; set; }
         public float Color { get; set; }
         public bool? AddAfterBoil { get; set; }
         public string Notes { get; set; }
+        public string DisplayColor { get; set; }
+        public string DisplayAmount { get; set; }
+
 
     }
 }

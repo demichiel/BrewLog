@@ -221,6 +221,8 @@ namespace BrewLog.Controllers
             recipe.Notes = xnList[0]["NOTES"].InnerText;
             recipe.Date = DateTime.Now;
             await _context.SaveChangesAsync();
+
+            // Load all hops
             xnList = doc.SelectNodes("RECIPES/RECIPE/HOPS/HOP");
             recipe.Hops = new List<Hop>();
             foreach (XmlNode node in xnList)
@@ -232,10 +234,46 @@ namespace BrewLog.Controllers
                 minutes = minutes.Substring(0, minutes.IndexOf('.'));
                 hop.Minutes = int.Parse(minutes);
                 hop.Name = node["NAME"].InnerText;
+                hop.DisplayAmount = node["DISPLAY_AMOUNT"].InnerText;
+                hop.DisplayTime = node["DISPLAY_TIME"].InnerText;
+                hop.Type = node["TYPE"].InnerText;
                 recipe.Hops.Add(hop);
-                //_context.Add(hop);
                 await _context.SaveChangesAsync();
             }
+
+            // Load all fermentables
+            xnList = doc.SelectNodes("RECIPES/RECIPE/FERMENTABLES/FERMENTABLE");
+            recipe.Fermentables = new List<Fermentable>();
+            foreach (XmlNode node in xnList)
+            {
+                Fermentable fermentable = new Fermentable();
+                fermentable.Name = node["NAME"].InnerText;
+                fermentable.Type = node["TYPE"].InnerText;
+                fermentable.Amount = double.Parse(node["AMOUNT"].InnerText, System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"));
+                fermentable.Color = float.Parse(node["AMOUNT"].InnerText, System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"));
+                fermentable.Notes = node["NOTES"].InnerText;
+                fermentable.DisplayAmount = node["DISPLAY_AMOUNT"].InnerText;
+                fermentable.DisplayColor = node["DISPLAY_COLOR"].InnerText;
+                recipe.Fermentables.Add(fermentable);
+                await _context.SaveChangesAsync();
+            }
+
+            // Load all yeasts
+            xnList = doc.SelectNodes("RECIPES/RECIPE/YEASTS/YEAST");
+            recipe.Yeasts = new List<Yeast>();
+            foreach (XmlNode node in xnList)
+            {
+                Yeast yeast = new Yeast();
+                yeast.Name = node["NAME"].InnerText;
+                yeast.Type = node["TYPE"].InnerText;
+                yeast.Form = node["FORM"].InnerText;
+                yeast.Notes = node["NOTES"].InnerText;
+                yeast.ProductID = node["PRODUCT_ID"].InnerText;
+                yeast.Laboratory = node["LABORATORY"].InnerText;
+                recipe.Yeasts.Add(yeast);
+                await _context.SaveChangesAsync();
+            }
+
             return true;
         }
     }
