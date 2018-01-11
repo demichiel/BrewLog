@@ -3,6 +3,44 @@ version: '3'
 services:
   brewlog:
     image: brewlog
+    links: 
+      - postgresserver
+    depends_on:
+      - postgresserver
     build:
       context: .
       dockerfile: BrewLog/Dockerfile
+    networks:
+       - mynetwork
+    ports:
+      - 5001:80
+
+  postgresserver:
+     image: postgres
+     restart: always
+     ports:
+       - 5432:5432
+     environment:
+         POSTGRES_PASSWORD: mysecretpassword
+     volumes:
+       - pgdata:/var/lib/postgresql/data
+     networks:
+       - mynetwork
+
+  pgadmin:
+    image: fenglc/pgadmin4
+    ports:
+      - 5050:5050
+    links:
+      - postgresserver
+    networks:
+       - mynetwork
+
+
+
+volumes:
+  pgdata:
+ 
+networks:
+  mynetwork:
+     driver: bridge

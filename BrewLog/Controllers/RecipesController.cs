@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BrewLog.Data;
 using BrewLog.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
-using Newtonsoft.Json;
 using System.Xml;
 using System.Globalization;
 
@@ -237,6 +235,7 @@ namespace BrewLog.Controllers
                 hop.DisplayAmount = node["DISPLAY_AMOUNT"].InnerText;
                 hop.DisplayTime = node["DISPLAY_TIME"].InnerText;
                 hop.Type = node["TYPE"].InnerText;
+                hop.Use = node["USE"].InnerText;
                 recipe.Hops.Add(hop);
                 await _context.SaveChangesAsync();
             }
